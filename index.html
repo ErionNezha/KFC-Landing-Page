@@ -66,7 +66,7 @@ footer strong{color:#9fb3c8}
 </div>
 <main>
 <div class="note">💡 Demo-ja live ekzekutohet direkt në browser. Kliko <strong>Kodi Burim</strong> për të parë kodin e plotë të projektit.</div>
-<div id="p-demo" class="panel active"><iframe class="demo" src="original/index.html" title="Live demo"></iframe></div>
+<div id="p-demo" class="panel active"><iframe class="demo" src="demo/index.html" title="Live demo"></iframe></div>
 <div id="p-code" class="panel"><div class="codewrap">
 <aside class="tree" id="tree"></aside>
 <div class="codeview"><div class="cbar" id="cbar"></div><div id="codebox"><pre></pre></div></div>
@@ -75,6 +75,7 @@ footer strong{color:#9fb3c8}
 <footer>Krijuar nga <strong>Erion Nezha</strong> — © 2026</footer>
 <script>
 const TREE={"dirs": [{"name": "images", "dirs": [], "files": ["burger.png", "burger_fries.png", "french_fries.png", "fried_chicken.png", "logo.png"]}], "files": ["burger.png", "burger_fries.png", "french_fries.png", "fried_chicken.png", "index.html", "logo.png", "style.css"]};
+const CODEDIR="demo";
 const IMG=/\.(png|jpe?g|gif|svg|webp|ico|bmp)$/i;
 function show(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+id).classList.add('active');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function buildTree(){
@@ -88,8 +89,8 @@ async function openFile(path,el){
   document.querySelectorAll('.tfile').forEach(e=>e.classList.remove('active'));el.classList.add('active');
   document.getElementById('cbar').textContent=path;
   const box=document.getElementById('codebox');
-  if(IMG.test(path)){box.innerHTML='<img class="preview" src="original/'+path+'">';return;}
-  try{const r=await fetch('original/'+path);const txt=await r.text();
+  if(IMG.test(path)){box.innerHTML='<img class="preview" src="'+CODEDIR+'/'+path+'">';return;}
+  try{const r=await fetch(CODEDIR+'/'+path);const txt=await r.text();
     box.innerHTML='<pre>'+hl(txt,path.split('.').pop())+'</pre>';
   }catch(e){box.innerHTML='<pre>Deshtoi leximi i file-it.</pre>';}
 }
